@@ -7,41 +7,26 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: '',
-      curretPath: ''
+      name: '',
+      file: null
     };
 
     this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(event) {
     this.setState({
-      value: event.target.value,
-      curretPath: this.state.curretPath
+      name: event.target.files[0].name,
+      file: event.target.files[0]
     });
-  }
-
-  handleSubmit(event) {
-    this.setState({
-      value: this.state.value,
-      curretPath: this.state.value
-    });
-    event.preventDefault();
   }
 
   render() {
     return (
-      <dev>
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            Путь к фаилу:
-            <input value={this.state.value} onChange={this.handleChange}/>
-          </label>
-          <input type="submit" value="Отправить" />
-        </form>
-        <Chart filePath={this.state.curretPath}/>
-      </dev>
+      <div>
+        <input id="file-input" type="file" name="name" onChange={this.handleChange} />
+        <Chart filePath={this.state.file}/>
+      </div>
     );
   }
 }

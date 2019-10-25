@@ -6,58 +6,50 @@ function readTextFile(file)
     rawFile.open("GET", file, false);
     rawFile.onreadystatechange = function ()
     {
+      console.log(this)
+
         if(rawFile.readyState === 4)
         {
             if(rawFile.status === 200 || rawFile.status == 0)
             {
                 var allText = rawFile.responseText;
-                alert(allText);
+                console.log(this)
             }
         }
     }
+    //rawFile.
     rawFile.send(null);
 }
 
 class Chart extends React.Component {
 
-  constructor() {
-    super();
-      console.log('nahuia')
+  constructor(props) {
+    super(props);
     this.state = {
-      filePath: ''
+      path: '',
+      content: ''
     }
   }
 
-  componentDidMount(){
-     /*if (newProps.filePath === this.state.filePath){
-      console.log('same1')
-      return
-    }*/
-      console.log('same1')
-  }
-
   componentDidUpdate(prevProps, prevState, snapshot){
-    if (this.props.filePath === prevProps.filePath){
+    if (this.props.filePath === this.state.path){
       console.log('same2')
       return
     }
     console.log('stste change')
     this.setState({
-      filePath: this.props.filePath
+      path: this.props.filePath,
+      content: this.state.content
     });
-    preventDefault();
+    readTextFile(this.props.filePath)
    }
   
   render(){
-      console.log('render')
-    if (this.state.filePath !== ''){
-      //readTextFile(this.state.filePath)
-      console.log('render2')
-    }
     return (
-      <dev>
-        {this.state.filePath}
-      </dev>
+      <div>
+        {this.state.path}
+        {this.state.content}
+      </div>
     );
   }
 }
