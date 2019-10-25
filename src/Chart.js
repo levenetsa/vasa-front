@@ -6,12 +6,9 @@ function readTextFile(context, file){
     var reader = new FileReader()
     reader.onload = function(){
       let result = JSON.parse(reader.result)
-      context.setState({
-        file: context.state.file,
-        content: reader.result,
+      context.updateState({
         elements: result,
-        solutions: result.solutions,
-        index: context.state.index
+        solutions: result.solutions
       });
     };
     reader.readAsText(file, "UTF-8")
@@ -29,32 +26,28 @@ class Chart extends React.Component {
       solutions: [],
       index: 0
     }
-    
+
     this.onSelectedChange = this.onSelectedChange.bind(this);
   }
 
-  componentDidUpdate(prevProps, prevState, snapshot){
+  updateState(newValues) {
+    let originalStateCopy = Object.assign({}, this.state)
+    let newState = Object.assign(originalStateCopy, newValues)
+    console.log(newState)
+    console.log(this)
+    this.setState(newState)
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
     if (prevProps.file === null || this.props.file.size !== prevProps.file.size){
       console.log(this.props.file)
-      this.setState({
-        file: this.props.file,
-        content: this.state.content,
-        elements:this.state.elements,
-        solutions:this.state.solutions,
-        index:this.state.index
-      });
+      this.updateState({file: this.props.file})
       readTextFile(this, this.props.file)
     }
    }
 
    onSelectedChange(e){
-    this.setState({
-        file: this.state.file,
-        content: this.state.content,
-        elements:this.state.elements,
-        solutions:this.state.solutions,
-        index: e.currentTarget.value
-      });
+    this.updateState({index: e.currentTarget.value});
    }
   
   render(){
