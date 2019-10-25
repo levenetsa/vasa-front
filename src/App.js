@@ -25,7 +25,7 @@ class App extends React.Component {
     return (
       <div>
         <input id="file-input" type="file" name="name" onChange={this.handleChange} />
-        <Chart filePath={this.state.file}/>
+        <Chart file={this.state.file}/>
       </div>
     );
   }

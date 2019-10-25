@@ -1,24 +1,21 @@
 import React from 'react';
+import Solution from './Solution.js'
+import Rect from './Rect.js';
 
-function readTextFile(file)
-{
-    var rawFile = new XMLHttpRequest();
-    rawFile.open("GET", file, false);
-    rawFile.onreadystatechange = function ()
-    {
-      console.log(this)
+function readTextFile(context, file){
+    var reader = new FileReader()
+    reader.onload = function(){
+      let result = JSON.parse(reader.result)
+      context.setState({
+        file: context.state.file,
+        content: reader.result,
+        elements: result,
+        solutions: result.solutions,
+        index: context.state.index
+      });
+    };
+    reader.readAsText(file, "UTF-8")
 
-        if(rawFile.readyState === 4)
-        {
-            if(rawFile.status === 200 || rawFile.status == 0)
-            {
-                var allText = rawFile.responseText;
-                console.log(this)
-            }
-        }
-    }
-    //rawFile.
-    rawFile.send(null);
 }
 
 class Chart extends React.Component {
@@ -26,29 +23,60 @@ class Chart extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      path: '',
-      content: ''
+      file: '',
+      content: '',
+      elements: null,
+      solutions: [],
+      index: 0
     }
+    
+    this.onSelectedChange = this.onSelectedChange.bind(this);
   }
 
   componentDidUpdate(prevProps, prevState, snapshot){
-    if (this.props.filePath === this.state.path){
-      console.log('same2')
-      return
+    if (prevProps.file === null || this.props.file.size !== prevProps.file.size){
+      console.log(this.props.file)
+      this.setState({
+        file: this.props.file,
+        content: this.state.content,
+        elements:this.state.elements,
+        solutions:this.state.solutions,
+        index:this.state.index
+      });
+      readTextFile(this, this.props.file)
     }
-    console.log('stste change')
+   }
+
+   onSelectedChange(e){
     this.setState({
-      path: this.props.filePath,
-      content: this.state.content
-    });
-    readTextFile(this.props.filePath)
+        file: this.state.file,
+        content: this.state.content,
+        elements:this.state.elements,
+        solutions:this.state.solutions,
+        index: e.currentTarget.value
+      });
    }
   
   render(){
+    console.log(this.state.elements)
+    if (this.state.elements == null) {
+      return (<div>No data</div>)
+    }
     return (
-      <div>
-        {this.state.path}
-        {this.state.content}
+      <div style={{ display:"flex" }}>
+        <div>
+          {this.state.elements.solutions.map((solution, index) => {
+            return (
+                <p>
+                  <input onChange={this.onSelectedChange}
+                    type="radio" id={solution.packerName}
+                    name="packerName" value={index}/>
+                  <label for={solution.packerName}>{solution.packerName}</label>
+                </p>
+              );
+          })}
+        </div>
+        <Solution data={this.state.solutions[this.state.index]}/>
       </div>
     );
   }
