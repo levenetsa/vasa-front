@@ -4,15 +4,17 @@ import Rect from './Rect.js';
 const mult = 10;
 
 function Solution(props) {
-    let rects = props.data.rects;
-    rects.forEach(it => {
-        it.x *= mult;
-        it.y *= mult;
-        it.px *= mult;
-        it.py *= mult;
-        it.width *= mult;
-        it.height *= mult;
-    });
+    console.log("re-render")
+    let rects = props.data.rects.map(it => { return {
+        index: it.index,
+        rotated: it.rotated,
+        x: it.x * mult,
+        y: it.y * mult,
+        px: it.px * mult,
+        py: it.py * mult,
+        width: it.width * mult,
+        height: it.height * mult
+    }});
     let min_x = Math.min.apply(Math, rects.map(it => it.x));
     let min_y = Math.min.apply(Math, rects.map(it => it.y));
     let max_x = Math.max.apply(Math, rects.map(it => it.x + it.width + 1));
@@ -21,7 +23,7 @@ function Solution(props) {
         <div>
             <div>
                 <svg width={(max_x - min_x)} height={(max_y - min_y)} style={{border: "2px solid black"}}>
-                    {props.data.rects.map(rect =>
+                    {rects.map(rect =>
                         <Rect
                             index={rect.index}
                             key={rect.index}
@@ -36,7 +38,7 @@ function Solution(props) {
                 <svg width={props.stripWidth * mult}
                      height={props.data.packHeight * mult}
                      style={{border: "2px solid black"}}>
-                    {props.data.rects.map(rect =>
+                    {rects.map(rect =>
                         <Rect index={rect.index}
                               key={rect.index}
                               x={rect.px}

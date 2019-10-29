@@ -13,6 +13,17 @@ function readTextFile(context, file) {
     reader.readAsText(file, "UTF-8")
 }
 
+function loadFile(context, name) {
+  fetch(`http://localhost:4567/${name}`).then(result =>
+    result.json().then(data => 
+      context.updateState({
+            elements: data,
+            solutions: data.solutions
+      })
+    ).catch(error => console.log(error))
+  )
+}
+
 class Chart extends React.Component {
 
     constructor(props) {
@@ -35,9 +46,13 @@ class Chart extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevProps.file === null || this.props.file.size !== prevProps.file.size) {
+        if (prevProps.file === null || this.props.file !== prevProps.file) {
             this.updateState({file: this.props.file});
-            readTextFile(this, this.props.file);
+            if (typeof this.props.file === 'string') {
+              loadFile(this, this.props.file);
+            } else {
+              readTextFile(this, this.props.file);
+            }
         }
     }
 
@@ -46,7 +61,7 @@ class Chart extends React.Component {
     }
 
     render() {
-        console.log(this.state.elements);
+        console.log(this.state.solutions);
         if (this.state.elements == null) {
             return (<div>No data</div>)
         }
