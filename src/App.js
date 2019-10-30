@@ -1,91 +1,91 @@
-import React from 'react';
-import './App.css';
-import Chart from './Chart.js';
+import React from "react";
+import "./App.css";
+import Chart from "./components/Chart.js";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
+import Grid from "@material-ui/core/Grid";
 
 class App extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            file: '',
-            files: [],
-            isFile: false
-        };
+  constructor(props) {
+    super(props);
+    this.state = {
+      file: "",
+      files: [],
+      isFile: true
+    };
+    this.componentDidUpdate();
 
-        this.handleChange = this.handleChange.bind(this);
-        this.onSelectedFileChange = this.onSelectedFileChange.bind(this);
-        this.onSelectedModeChange = this.onSelectedModeChange.bind(this);
-    }
+    this.handleChange = this.handleChange.bind(this);
+    this.onSelectedFileChange = this.onSelectedFileChange.bind(this);
+    this.onSelectedModeChange = this.onSelectedModeChange.bind(this);
+  }
 
-    handleChange(event) {
-        this.setState({
-            file: event.target.files[0],
-            files: this.state.files,
+  componentDidUpdate() {
+    if (this.state.isFile && this.state.files.length === 0) {
+      fetch("http://localhost:4567/").then(response =>
+        response.json().then(data =>
+          this.setState({
+            file: data[0],
+            files: data,
             isFile: this.state.isFile
-        });
+          })
+        )
+      );
     }
+  }
 
-    onSelectedFileChange(event) {
-        this.setState({
-                        file: event.target.value,
-                        files: this.state.files,
-                        isFile: this.state.isFile
-                    });
-    }
+  handleChange(event) {
+    this.setState({
+      file: event.target.files[0],
+      files: this.state.files,
+      isFile: this.state.isFile
+    });
+  }
 
-    onSelectedModeChange(event) {
-        this.setState({
-            file: this.state.file,
-            files: this.state.files,
-            isFile: event.target.value === "true"
-        });
-        if (event.target.value === "true") {
-            fetch("http://localhost:4567/").then(response => 
-                response.json().then(data =>
-                    this.setState({
-                        file: data[0],
-                        files: data,
-                        isFile: this.state.isFile
-                    })
-                )
-            )
-        }
-    }
+  onSelectedFileChange(file) {
+    this.setState({
+      file: file,
+      files: this.state.files,
+      isFile: this.state.isFile
+    });
+  }
 
-    render() {
-        return (
-            <div>
-                <p>
-                    <input onChange={this.onSelectedModeChange}
-                           type="radio" id="single"
-                           name="mode" value="false"/>
-                    <label form="single">Single</label>
-                </p>
-                <p>
-                    <input onChange={this.onSelectedModeChange}
-                           type="radio" id="multi"
-                           name="mode" value="true"/>
-                    <label form="multi">Multi</label>
-                </p>
-                --------------------------
-                    { this.state.isFile ? (
-                        this.state.files.map( (file, index) => {return (
-                                        <p key={file}>
-                                            <input onChange={this.onSelectedFileChange}
-                                                   type="radio" id={file}
-                                                   name="fileName" value={file}/>
-                                            <label form={file}>{file}</label>
-                                        </p>
-                                     );})
-                        ):(
-                        <div>
-                             <input id="file-input" type="file" name="name" onChange={this.handleChange}/>
-                        </div>)
-                    }
-                -----------------------
-                <Chart file={this.state.file}/>
-            </div>
-        );
-    }
+  onSelectedModeChange(event) {
+    this.setState({
+      file: this.state.file,
+      files: this.state.files,
+      isFile: !this.state.isFile
+    });
+  }
+
+  render() {
+    return (
+      <Grid
+        container
+        direction="row"
+        alignItems="flex-start"
+        xs={12}
+      >
+        <List
+          component="nav"
+          aria-label="main mailbox folders"
+          xs={2}
+        >
+          {this.state.files.map(file => (
+            <ListItem
+              button
+              selected={this.state.file === file}
+              onClick={event => this.onSelectedFileChange(file)}
+            >
+              <ListItemText primary={file} />
+            </ListItem>
+          ))}
+        </List>
+        <Chart file={this.state.file} xs={10}/>
+      </Grid>
+    );
+  }
 }
 
 export default App;
