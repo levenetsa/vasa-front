@@ -4,6 +4,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Grid from "@material-ui/core/Grid";
 import Solution from "./Solution.js";
+import {updateState} from "../utils/utils.js";
 
 function loadFile(context, name) {
   fetch(`http://localhost:4567/${name}`).then(result =>
@@ -34,12 +35,7 @@ class Chart extends React.Component {
     };
 
     this.onSelectedPackerChange = this.onSelectedPackerChange.bind(this);
-  }
-
-  updateState(newValues) {
-    let originalStateCopy = Object.assign({}, this.state);
-    let newState = Object.assign(originalStateCopy, newValues);
-    this.setState(newState);
+    this.updateState = updateState.bind(this);
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
