@@ -4,7 +4,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Grid from "@material-ui/core/Grid";
 import Solution from "./Solution.js";
-import {updateState} from "../utils/utils.js";
+import { updateState } from "../utils/utils.js";
 
 function loadFile(context, name) {
   fetch(`http://localhost:4567/${name}`).then(result =>
@@ -46,9 +46,9 @@ class Chart extends React.Component {
   }
 
   onSelectedPackerChange(name, index) {
-    this.updateState({ 
-        index: index,
-        packer: name
+    this.updateState({
+      index: index,
+      packer: name
     });
   }
 
@@ -58,23 +58,29 @@ class Chart extends React.Component {
       return <div>No data</div>;
     }
     return (
-      <Grid container direction="row" alignItems="flex-start" xs={12}>
-        <List component="nav" aria-label="main mailbox folders" xs={2}>
-          {this.state.elements.solutions.map((solution, index) => (
-            <ListItem
-              button
-              selected={this.state.packer === solution.packerName}
-              onClick={event => this.onSelectedPackerChange(solution.packerName, index)}
-            >
-              <ListItemText primary={solution.packerName} />
-            </ListItem>
-          ))}
-        </List>
-
-        <Solution
-          stripWidth={this.state.elements.ctInput.stripWidth}
-          data={this.state.solutions[this.state.index]}
-        />
+      <Grid container item direction="row" xs={12}>
+        <Grid item xs={4}>
+          <List component="nav" aria-label="main mailbox folders" xs={2}>
+            {this.state.elements.solutions.map((solution, index) => (
+              <ListItem
+                button
+                selected={this.state.packer === solution.packerName}
+                onClick={event =>
+                  this.onSelectedPackerChange(solution.packerName, index)
+                }
+              >
+                <ListItemText primary={solution.packerName} />
+              </ListItem>
+            ))}
+          </List>
+        </Grid>
+        <Grid item xs={8}>
+          <Solution
+            stripWidth={this.state.elements.ctInput.stripWidth}
+            data={this.state.solutions[this.state.index]}
+            xs={10}
+          />
+        </Grid>
       </Grid>
     );
   }

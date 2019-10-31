@@ -8,6 +8,7 @@ function getRandomColor(seed) {
 function Rect(props) {
 
     return <rect
+        style={{stroke: "#000000", strokeWidth: "0.4" }}
         x={props.x}
         y={props.y}
         width={props.w}
@@ -16,4 +17,3 @@ function Rect(props) {
 }
 
 export default Rect;
-

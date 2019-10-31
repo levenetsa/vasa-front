@@ -5,7 +5,7 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Grid from "@material-ui/core/Grid";
-import {updateState} from "./utils/utils.js";
+import { updateState } from "./utils/utils.js";
 
 class App extends React.Component {
   constructor(props) {
@@ -41,19 +41,23 @@ class App extends React.Component {
 
   render() {
     return (
-      <Grid container direction="row" alignItems="flex-start" xs={12}>
-        <List component="nav" aria-label="main mailbox folders" xs={2}>
-          {this.state.files.map(file => (
-            <ListItem
-              button
-              selected={this.state.file === file}
-              onClick={event => this.onSelectedFileChange(file)}
-            >
-              <ListItemText primary={file} />
-            </ListItem>
-          ))}
-        </List>
-        <Chart file={this.state.file} xs={10} />
+      <Grid container direction="row" xs={12}>
+        <Grid item xs={2}>
+          <List component="nav" aria-label="main mailbox folders">
+            {this.state.files.map(file => (
+              <ListItem
+                button
+                selected={this.state.file === file}
+                onClick={event => this.onSelectedFileChange(file)}
+              >
+                <ListItemText primary={file} />
+              </ListItem>
+            ))}
+          </List>
+        </Grid>
+        <Grid item xs={10}>
+          <Chart file={this.state.file} />
+        </Grid>
       </Grid>
     );
   }
