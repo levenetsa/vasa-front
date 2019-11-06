@@ -43,7 +43,8 @@ class App extends React.Component {
     return (
       <Grid container direction="row" xs={12}>
         <Grid item xs={2}>
-          <List component="nav" aria-label="main mailbox folders">
+          <h2 style={{paddingLeft:"17px"}}>Solutions</h2>
+          <List>
             {this.state.files.map(file => (
               <ListItem
                 button

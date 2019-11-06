@@ -24,6 +24,7 @@ function Solution(props) {
   return (
     <div>
       <div>
+        <h2 style={{paddingLeft:"17px"}}>Input Split</h2>
         <svg
           width={max_x - min_x}
           height={max_y - min_y}
@@ -42,6 +43,7 @@ function Solution(props) {
         </svg>
       </div>
       <div>
+        <h2 style={{paddingLeft:"17px"}}>Pack</h2>
         <svg
           transform="rotate(180)"
           width={props.stripWidth * mult}

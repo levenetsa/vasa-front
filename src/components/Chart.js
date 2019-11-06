@@ -60,7 +60,8 @@ class Chart extends React.Component {
     return (
       <Grid container item direction="row" xs={12}>
         <Grid item xs={4}>
-          <List component="nav" aria-label="main mailbox folders" xs={2}>
+          <h2 style={{paddingLeft:"17px"}}>Packer</h2>
+          <List xs={2}>
             {this.state.elements.solutions.map((solution, index) => (
               <ListItem
                 button
@@ -69,7 +70,7 @@ class Chart extends React.Component {
                   this.onSelectedPackerChange(solution.packerName, index)
                 }
               >
-                <ListItemText primary={solution.packerName} />
+                <ListItemText primary={`${solution.packerName} ${solution.efficency * 1000 / 1000 * 10} ${solution.elapsedTimeInMilliseconds}`} />
               </ListItem>
             ))}
           </List>
