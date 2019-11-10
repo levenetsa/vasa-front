@@ -8,14 +8,17 @@ function loadFile(context, name) {
   fetch(`http://localhost:4567/${name}`).then(result =>
     result
       .json()
-      .then(data =>
+      .then(data => {
+        data.solutions = data.solutions.sort(
+          (a, b) => a.efficency * 10 - b.efficency * 10
+        );
         context.updateState({
           elements: data,
           solutions: data.solutions,
           index: 0,
           packer: data.solutions[0].packerName
-        })
-      )
+        });
+      })
       .catch(error => console.log(error))
   );
 }
