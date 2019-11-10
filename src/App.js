@@ -6,6 +6,19 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Grid from "@material-ui/core/Grid";
 import { updateState } from "./utils/utils.js";
+import { Paper } from "@material-ui/core";
+import { makeStyles } from '@material-ui/core/styles';
+
+export const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  },
+}));
 
 class App extends React.Component {
   constructor(props) {
@@ -41,23 +54,25 @@ class App extends React.Component {
 
   render() {
     return (
-      <Grid container direction="row" style={{ flexGrow: 1 }}>
-        <Grid item>
-          <h2 style={{ paddingLeft: "17px" }}>Solutions</h2>
-          <h5 style={{ paddingTop: "17px", paddingLeft: "17px" }}>File Name</h5>
-          <List>
-            {this.state.files.map(file => (
-              <ListItem
-                button
-                selected={this.state.file === file}
-                onClick={event => this.onSelectedFileChange(file)}
-              >
-                <ListItemText primary={file} />
-              </ListItem>
-            ))}
-          </List>
+      <Grid container direction="row" style={{ flexGrow: 1 }} spacing={1}>
+        <Grid item xs={2}> 
+          <Paper style={{padding: "20px"}}>
+            <h2 style={{ paddingLeft: "17px" }}>Solutions</h2>
+            <h5 style={{ paddingTop: "17px", paddingLeft: "17px" }}>File Name</h5>
+            <List>
+              {this.state.files.map(file => (
+                <ListItem
+                  button
+                  selected={this.state.file === file}
+                  onClick={event => this.onSelectedFileChange(file)}
+                >
+                  <ListItemText primary={file} />
+                </ListItem>
+              ))}
+            </List>
+          </Paper>
         </Grid>
-        <Grid item>
+        <Grid item xs={10}>
           <Chart file={this.state.file} />
         </Grid>
       </Grid>

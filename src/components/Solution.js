@@ -1,5 +1,6 @@
 import React from "react";
 import Rect from "./Rect.js";
+import { Paper } from "@material-ui/core";
 
 const mult = 10;
 
@@ -22,7 +23,7 @@ function Solution(props) {
   let max_x = Math.max.apply(Math, rects.map(it => it.x + it.width + 1));
   let max_y = Math.max.apply(Math, rects.map(it => it.y + it.height + 1));
   return (
-    <div>
+    <Paper style={{ paddingLeft: "17px" }}>
       <div>
         <h2 style={{ paddingLeft: "17px" }}>Input Split</h2>
         <div
@@ -82,7 +83,7 @@ function Solution(props) {
           </svg>
         </div>
       </div>
-    </div>
+    </Paper>
   );
 }
 

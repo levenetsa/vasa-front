@@ -3,6 +3,7 @@ import Grid from "@material-ui/core/Grid";
 import Solution from "./Solution.js";
 import PackerTable from "./PackerTable.js";
 import { updateState } from "../utils/utils.js";
+import { Paper } from "@material-ui/core";
 
 function loadFile(context, name) {
   fetch(`http://localhost:4567/${name}`).then(result =>
@@ -46,23 +47,21 @@ class Chart extends React.Component {
   }
 
   render() {
-    console.log(this.state.solutions);
     if (this.state.elements == null) {
       return <div>No data</div>;
     }
     return (
-      <Grid container item direction="row" xs={20}>
-        <Grid item xs={10}>
-          <h2 style={{ paddingLeft: "17px" }}>Packer</h2>
-          <PackerTable solutions={this.state.elements.solutions} />
+        <Grid container direction="row" spacing={1}>
+          <Grid item xs={6}>
+            <PackerTable solutions={this.state.elements.solutions} />
+          </Grid>
+          <Grid item xs={6}>
+            <Solution
+              stripWidth={this.state.elements.ctInput.stripWidth}
+              data={this.state.solutions[this.state.index]}
+            />
+          </Grid>
         </Grid>
-        <Grid item xs={5}>
-          <Solution
-            stripWidth={this.state.elements.ctInput.stripWidth}
-            data={this.state.solutions[this.state.index]}
-          />
-        </Grid>
-      </Grid>
     );
   }
 }
