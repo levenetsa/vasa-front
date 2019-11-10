@@ -24,14 +24,16 @@ function Solution(props) {
   return (
     <div>
       <div>
-        <h2 style={{paddingLeft:"17px"}}>Input Split</h2>
-        <div 
-          style={{ 
-                      width: `${max_x - min_x + 4}px`,
-                      height: `${max_y - min_y + 3}px`,
-                      backgroundColor: "#AAAAAA",
-                      backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='25' height='25' viewBox='0 0 20 20'%3E%3Cg %3E%3Cpolygon fill='%23777777' points='20 10 10 0 0 0 20 20'/%3E%3Cpolygon fill='%23777777' points='0 10 0 20 10 20'/%3E%3C/g%3E%3C/svg%3E\")"
-                      }}>
+        <h2 style={{ paddingLeft: "17px" }}>Input Split</h2>
+        <div
+          style={{
+            width: `${max_x - min_x + 4}px`,
+            height: `${max_y - min_y + 3}px`,
+            backgroundColor: "#AAAAAA",
+            backgroundImage:
+              "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='25' height='25' viewBox='0 0 20 20'%3E%3Cg %3E%3Cpolygon fill='%23777777' points='20 10 10 0 0 0 20 20'/%3E%3Cpolygon fill='%23777777' points='0 10 0 20 10 20'/%3E%3C/g%3E%3C/svg%3E\")"
+          }}
+        >
           <svg
             width={max_x - min_x}
             height={max_y - min_y}
@@ -51,14 +53,16 @@ function Solution(props) {
         </div>
       </div>
       <div>
-        <h2 style={{paddingLeft:"17px"}}>Pack</h2>
-        <div 
-        style={{ 
-                      width: `${props.stripWidth * mult}px`,
-                      height: `${props.data.packHeight * mult}px`,
-                      backgroundColor: "#AAAAAA",
-                      backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='25' height='25' viewBox='0 0 20 20'%3E%3Cg %3E%3Cpolygon fill='%23777777' points='20 10 10 0 0 0 20 20'/%3E%3Cpolygon fill='%23777777' points='0 10 0 20 10 20'/%3E%3C/g%3E%3C/svg%3E\")"
-                      }}>
+        <h2 style={{ paddingLeft: "17px" }}>Pack</h2>
+        <div
+          style={{
+            width: `${props.stripWidth * mult}px`,
+            height: `${props.data.packHeight * mult}px`,
+            backgroundColor: "#AAAAAA",
+            backgroundImage:
+              "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='25' height='25' viewBox='0 0 20 20'%3E%3Cg %3E%3Cpolygon fill='%23777777' points='20 10 10 0 0 0 20 20'/%3E%3Cpolygon fill='%23777777' points='0 10 0 20 10 20'/%3E%3C/g%3E%3C/svg%3E\")"
+          }}
+        >
           <svg
             transform="rotate(180)"
             width={props.stripWidth * mult}

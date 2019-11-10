@@ -50,7 +50,7 @@ class Chart extends React.Component {
     return (
       <Grid container item direction="row" xs={20}>
         <Grid item xs={10}>
-          <h2 style={{paddingLeft:"17px"}}>Packer</h2>
+          <h2 style={{ paddingLeft: "17px" }}>Packer</h2>
           <PackerTable solutions={this.state.elements.solutions} />
         </Grid>
         <Grid item xs={5}>
