@@ -41,9 +41,10 @@ class App extends React.Component {
 
   render() {
     return (
-      <Grid container direction="row" xs={12}>
-        <Grid item xs={2}>
+      <Grid container direction="row" style={{flexGrow: 1}}>
+        <Grid item >
           <h2 style={{paddingLeft:"17px"}}>Solutions</h2>
+          <h5 style={{paddingTop: "17px", paddingLeft:"17px"}}>File Name</h5>
           <List>
             {this.state.files.map(file => (
               <ListItem
@@ -56,7 +57,7 @@ class App extends React.Component {
             ))}
           </List>
         </Grid>
-        <Grid item xs={10}>
+        <Grid item >
           <Chart file={this.state.file} />
         </Grid>
       </Grid>

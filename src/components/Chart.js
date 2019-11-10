@@ -1,9 +1,7 @@
 import React from "react";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
 import Grid from "@material-ui/core/Grid";
 import Solution from "./Solution.js";
+import PackerTable from "./PackerTable.js";
 import { updateState } from "../utils/utils.js";
 
 function loadFile(context, name) {
@@ -34,7 +32,6 @@ class Chart extends React.Component {
       packer: ""
     };
 
-    this.onSelectedPackerChange = this.onSelectedPackerChange.bind(this);
     this.updateState = updateState.bind(this);
   }
 
@@ -45,41 +42,21 @@ class Chart extends React.Component {
     }
   }
 
-  onSelectedPackerChange(name, index) {
-    this.updateState({
-      index: index,
-      packer: name
-    });
-  }
-
   render() {
     console.log(this.state.solutions);
     if (this.state.elements == null) {
       return <div>No data</div>;
     }
     return (
-      <Grid container item direction="row" xs={12}>
-        <Grid item xs={4}>
+      <Grid container item direction="row" xs={20}>
+        <Grid item xs={10}>
           <h2 style={{paddingLeft:"17px"}}>Packer</h2>
-          <List xs={2}>
-            {this.state.elements.solutions.map((solution, index) => (
-              <ListItem
-                button
-                selected={this.state.packer === solution.packerName}
-                onClick={event =>
-                  this.onSelectedPackerChange(solution.packerName, index)
-                }
-              >
-                <ListItemText primary={`${solution.packerName} ${solution.efficency * 1000 / 1000 * 10} ${solution.elapsedTimeInMilliseconds}`} />
-              </ListItem>
-            ))}
-          </List>
+          <PackerTable solutions={this.state.elements.solutions} />
         </Grid>
-        <Grid item xs={8}>
+        <Grid item xs={5}>
           <Solution
             stripWidth={this.state.elements.ctInput.stripWidth}
             data={this.state.solutions[this.state.index]}
-            xs={10}
           />
         </Grid>
       </Grid>
