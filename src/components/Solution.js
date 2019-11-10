@@ -23,7 +23,7 @@ function Solution(props) {
   let max_x = Math.max.apply(Math, rects.map(it => it.x + it.width + 1));
   let max_y = Math.max.apply(Math, rects.map(it => it.y + it.height + 1));
   return (
-    <Paper style={{ paddingLeft: "17px" }}>
+    <Paper style={{ padding: "17px" }}>
       <div>
         <h2 style={{ paddingLeft: "17px" }}>Input Split</h2>
         <div

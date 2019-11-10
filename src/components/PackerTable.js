@@ -26,6 +26,7 @@ class PackerTable extends React.Component {
     this.updateState({
       selected: solution
     });
+    this.props.callback(solution)
   }
 
   componentDidUpdate(prevProps) {
@@ -39,16 +40,17 @@ class PackerTable extends React.Component {
   }
 
   render() {
-    //TO DO: pass state up
     return (
-      <Paper style={{padding: "20px"}}>
+      <Paper style={{ padding: "20px" }}>
         <h2 style={{ paddingLeft: "17px" }}>Packer</h2>
         <Table aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell size='small'>Packer Name</TableCell>
-              <TableCell align="right" size='small'>Price</TableCell>
-              <TableCell align="right" size='small'>
+              <TableCell size="small">Packer Name</TableCell>
+              <TableCell align="right" size="small">
+                Price
+              </TableCell>
+              <TableCell align="right" size="small">
                 Efficency = {this.state.efficency.toFixed(3)}
               </TableCell>
             </TableRow>

@@ -16,8 +16,7 @@ function loadFile(context, name) {
         context.updateState({
           elements: data,
           solutions: data.solutions,
-          index: 0,
-          packer: data.solutions[0].packerName
+          activeSolution: data.solutions[0]
         });
       })
       .catch(error => console.log(error))
@@ -32,8 +31,7 @@ class Chart extends React.Component {
       content: "",
       elements: null,
       solutions: [],
-      index: 0,
-      packer: ""
+      activeSolution: null
     };
 
     this.updateState = updateState.bind(this);
@@ -46,22 +44,31 @@ class Chart extends React.Component {
     }
   }
 
+  selectedPackerChanged(solution) {
+    this.updateState({
+      activeSolution: solution
+    });
+  }
+
   render() {
     if (this.state.elements == null) {
       return <div>No data</div>;
     }
     return (
-        <Grid container direction="row" spacing={1}>
-          <Grid item xs={6}>
-            <PackerTable solutions={this.state.elements.solutions} />
-          </Grid>
-          <Grid item xs={6}>
-            <Solution
-              stripWidth={this.state.elements.ctInput.stripWidth}
-              data={this.state.solutions[this.state.index]}
-            />
-          </Grid>
+      <Grid container direction="row" spacing={1}>
+        <Grid item xs={6}>
+          <PackerTable
+            solutions={this.state.elements.solutions}
+            callback={solution => this.selectedPackerChanged(solution)}
+          />
         </Grid>
+        <Grid item xs={6}>
+          <Solution
+            stripWidth={this.state.elements.ctInput.stripWidth}
+            data={this.state.activeSolution}
+          />
+        </Grid>
+      </Grid>
     );
   }
 }
