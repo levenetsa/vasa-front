@@ -12,10 +12,7 @@ class PackerTable extends React.Component {
     super(props);
     this.state = {
       solutions: props.solutions,
-      selected: props.solutions[0],
-      efficency:
-        props.solutions.map(it => it.efficency).reduce((a, b) => a + b) /
-        props.solutions.length
+      selected: props.solutions[0]
     };
 
     this.onSelectedPackerChange = this.onSelectedPackerChange.bind(this);
@@ -47,12 +44,8 @@ class PackerTable extends React.Component {
           <TableHead>
             <TableRow>
               <TableCell size="small">Packer Name</TableCell>
-              <TableCell align="right" size="small">
-                Price
-              </TableCell>
-              <TableCell align="right" size="small">
-                Efficency = {this.state.efficency.toFixed(3)}
-              </TableCell>
+              <TableCell align="right" size="small">Price</TableCell>
+              <TableCell align="right" size="small">Efficency</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
