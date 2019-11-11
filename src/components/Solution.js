@@ -1,6 +1,7 @@
 import React from "react";
 import Rect from "./Rect.js";
 import { Paper } from "@material-ui/core";
+import { min, max } from "../utils/utils.js"
 
 const mult = 10;
 
@@ -18,10 +19,10 @@ function Solution(props) {
       height: it.height * mult
     };
   });
-  let min_x = Math.min.apply(Math, rects.map(it => it.x));
-  let min_y = Math.min.apply(Math, rects.map(it => it.y));
-  let max_x = Math.max.apply(Math, rects.map(it => it.x + it.width + 1));
-  let max_y = Math.max.apply(Math, rects.map(it => it.y + it.height + 1));
+  let min_x = min(rects, (it) => it.rotated?it.x:it.y);
+  let min_y = min(rects, (it) => it.rotated?it.x:it.y);
+  let max_x = max(rects, (it) => it.rotated?it.x:it.y + it.rotated?it.width:it.height + 1);
+  let max_y = max(rects, (it) =>  it.rotated?it.y:it.x + it.rotated?it.height:it.width + 1);
   return (
     <Paper style={{ padding: "17px" }}>
       <div>
