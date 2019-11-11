@@ -6,28 +6,22 @@ import { updateState } from "../utils/utils.js";
 import { Paper } from "@material-ui/core";
 
 function loadFile(context, name) {
-  fetch(`http://localhost:4567/${name}`).then(result =>
-    result
-      .json()
-      .then(data => {
-        data.solutions = data.solutions.sort(
-          (a, b) => a.efficency * 10 - b.efficency * 10
-        );
-        context.updateState({
-          elements: data,
-          solutions: data.solutions,
-          activeSolution: data.solutions[0]
-        });
-      })
-      .catch(error => console.log(error))
+  var json = require(`../data/${name}`);
+  json.solutions = json.solutions.sort(
+    (a, b) => a.efficency * 10 - b.efficency * 10
   );
+  context.updateState({
+    elements: json,
+    solutions: json.solutions,
+    activeSolution: json.solutions[0]
+  });
 }
 
 class Chart extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      file: "",
+      file: props.file,
       content: "",
       elements: null,
       solutions: [],
@@ -35,6 +29,10 @@ class Chart extends React.Component {
     };
 
     this.updateState = updateState.bind(this);
+  }
+
+  componentDidMount(){
+    loadFile(this, this.state.file);
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {

@@ -23,27 +23,13 @@ export const useStyles = makeStyles(theme => ({
 class App extends React.Component {
   constructor(props) {
     super(props);
+    var json = require('./data/files.json');
     this.state = {
-      file: "",
-      files: []
+      file: json[0],
+      files: json
     };
-    this.componentDidUpdate();
-
     this.onSelectedFileChange = this.onSelectedFileChange.bind(this);
     this.updateState = updateState.bind(this);
-  }
-
-  componentDidUpdate() {
-    if (this.state.files.length === 0) {
-      fetch("http://localhost:4567/").then(response =>
-        response.json().then(data =>
-          this.updateState({
-            file: data[0],
-            files: data
-          })
-        )
-      );
-    }
   }
 
   onSelectedFileChange(file) {
