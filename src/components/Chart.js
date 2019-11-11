@@ -1,14 +1,14 @@
 import React from "react";
 import Grid from "@material-ui/core/Grid";
-import Solution from "./Solution.js";
+import SolutionPane from "./SolutionPane.js";
+import SourcePane from "./SourcePane.js";
 import PackerTable from "./PackerTable.js";
 import { updateState } from "../utils/utils.js";
-import { Paper } from "@material-ui/core";
 
 function loadFile(context, name) {
   var json = require(`../data/${name}`);
   json.solutions = json.solutions.sort(
-    (a, b) => a.efficency * 10 - b.efficency * 10
+    (a, b) => b.efficency * 10 - a.efficency * 10
   );
   context.updateState({
     elements: json,
@@ -31,7 +31,7 @@ class Chart extends React.Component {
     this.updateState = updateState.bind(this);
   }
 
-  componentDidMount(){
+  componentDidMount() {
     loadFile(this, this.state.file);
   }
 
@@ -59,9 +59,10 @@ class Chart extends React.Component {
             solutions={this.state.elements.solutions}
             callback={solution => this.selectedPackerChanged(solution)}
           />
+          <SourcePane data={this.state.activeSolution} />
         </Grid>
         <Grid item xs={6}>
-          <Solution
+          <SolutionPane
             stripWidth={this.state.elements.ctInput.stripWidth}
             data={this.state.activeSolution}
           />

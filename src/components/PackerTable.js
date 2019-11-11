@@ -40,7 +40,8 @@ class PackerTable extends React.Component {
     return (
       <Paper style={{ padding: "20px" }}>
         <h2 style={{ paddingLeft: "17px" }}>Packer</h2>
-        <Table aria-label="simple table">
+        <div style={{ height: "554px", overflow: 'auto'}}>
+        <Table stickyHeader aria-label="simple table" >
           <TableHead>
             <TableRow>
               <TableCell size="small">Packer Name</TableCell>
@@ -64,6 +65,7 @@ class PackerTable extends React.Component {
             ))}
           </TableBody>
         </Table>
+        </div>
       </Paper>
     );
   }
