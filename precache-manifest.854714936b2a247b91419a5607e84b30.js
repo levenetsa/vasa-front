@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "0a3ca9381e7eee081b265c9358fe485a",
+    "revision": "674eb3e31a245bd0eefd615aa19dc897",
     "url": "/vasa-front/index.html"
   },
   {
-    "revision": "3584ec2769a3a7b3f496",
+    "revision": "a6df9efb39bb1a59492c",
     "url": "/vasa-front/static/css/main.956fbf46.chunk.css"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/vasa-front/static/js/2.c13f6657.chunk.js"
   },
   {
-    "revision": "3584ec2769a3a7b3f496",
-    "url": "/vasa-front/static/js/main.6c3cece4.chunk.js"
+    "revision": "a6df9efb39bb1a59492c",
+    "url": "/vasa-front/static/js/main.74c1bf02.chunk.js"
   },
   {
     "revision": "47b09f8a158c225685a8",
