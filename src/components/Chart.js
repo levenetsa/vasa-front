@@ -7,9 +7,6 @@ import { updateState } from "../utils/utils.js";
 
 function loadFile(context, name) {
   var json = require(`../data/${name}`);
-  json.solutions = json.solutions.sort(
-    (a, b) => b.efficency * 10 - a.efficency * 10
-  );
   context.updateState({
     elements: json,
     solutions: json.solutions,

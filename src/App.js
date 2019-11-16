@@ -48,6 +48,7 @@ class App extends React.Component {
             <List>
               {this.state.files.map(file => (
                 <ListItem
+                  key={file} 
                   button
                   selected={this.state.file === file}
                   onClick={event => this.onSelectedFileChange(file)}
