@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/vasa-front/static/css/main.956fbf46.chunk.css",
-    "main.js": "/vasa-front/static/js/main.376d4b02.chunk.js",
-    "main.js.map": "/vasa-front/static/js/main.376d4b02.chunk.js.map",
+    "main.js": "/vasa-front/static/js/main.aad0f87d.chunk.js",
+    "main.js.map": "/vasa-front/static/js/main.aad0f87d.chunk.js.map",
     "runtime-main.js": "/vasa-front/static/js/runtime-main.882a0e05.js",
     "runtime-main.js.map": "/vasa-front/static/js/runtime-main.882a0e05.js.map",
     "static/js/2.dd3b671a.chunk.js": "/vasa-front/static/js/2.dd3b671a.chunk.js",
     "static/js/2.dd3b671a.chunk.js.map": "/vasa-front/static/js/2.dd3b671a.chunk.js.map",
     "index.html": "/vasa-front/index.html",
-    "precache-manifest.5142d8c855f3b81c70bf1b0f0b0e002c.js": "/vasa-front/precache-manifest.5142d8c855f3b81c70bf1b0f0b0e002c.js",
+    "precache-manifest.c9dbb5af2957e58857c9507643d972e7.js": "/vasa-front/precache-manifest.c9dbb5af2957e58857c9507643d972e7.js",
     "service-worker.js": "/vasa-front/service-worker.js",
     "static/css/main.956fbf46.chunk.css.map": "/vasa-front/static/css/main.956fbf46.chunk.css.map"
   },
@@ -16,6 +16,6 @@
     "static/js/runtime-main.882a0e05.js",
     "static/js/2.dd3b671a.chunk.js",
     "static/css/main.956fbf46.chunk.css",
-    "static/js/main.376d4b02.chunk.js"
+    "static/js/main.aad0f87d.chunk.js"
   ]
 }
